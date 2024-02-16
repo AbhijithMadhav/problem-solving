@@ -14,7 +14,7 @@ class Customer implements Runnable {
     @Override
     public void run() {
         if (barberShop.getChair(toString())) {
-            barberShop.addCustomers(id);
+            barberShop.waitForBarber(id);
         }
     }
 

@@ -14,16 +14,17 @@ class Barber implements Runnable {
     @Override
     public void run() {
         while (true) {
-            Optional<Integer> customer = barberShop.getCustomer();
+            Optional<Integer> customer = barberShop.getNextWaitingCustomer();
             if (customer.isPresent()) {
                 System.out.println("Barber : Servicing customer " + customer.get() + "...");
                 try {
                     Thread.sleep(Duration.ofSeconds(new Random().nextInt(5)));
                     System.out.println("Barber : Finished with customer " + customer.get());
-                    barberShop.freeChair();
                 } catch (InterruptedException e) {
                     System.out.println("Barber : Got interrupted while servicing customer" + customer.get() + " . Closing shop");
                     break;
+                } finally {
+                    barberShop.releaseChair();
                 }
             } else {
                 try {

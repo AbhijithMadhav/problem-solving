@@ -27,17 +27,17 @@ public class BarberShop {
         return success;
     }
 
-    void freeChair() {
+    void releaseChair() {
         chairs.release();
     }
 
-    void addCustomers(int customerId) {
+    void waitForBarber(int customerId) {
         waitingCustomers.add(customerId);
         synchronized (this) {
             notify();
         }
     }
-    Optional<Integer> getCustomer() {
+    Optional<Integer> getNextWaitingCustomer() {
             // Locking is not required as there is only one barber in this problem statement.
             // In case the problem is improvised for multiple barbers this will be needed
 
