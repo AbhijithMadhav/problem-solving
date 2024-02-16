@@ -1,1 +1,1 @@
-This repository contains solutions to problems typically asked during interviews to tech companies
+This repository contains solutions to problems typically asked during interviews to tech companies. The goal is to populate the wiki of this repo with thinking or the mental process required to solve the problems. 
