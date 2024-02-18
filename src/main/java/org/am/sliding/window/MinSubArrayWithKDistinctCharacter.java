@@ -3,6 +3,12 @@ package org.am.sliding.window;
 import java.util.HashMap;
 import java.util.Map;
 
+// start = 0, end = 0
+// end++ : increment window until distinct characters == k
+// start++ : decrement window as long as distinct characters == k
+// Now we have the minSubarray with k distinct chars for all subarrays ending with 'end'
+// Need to do the same for all other chars from end + 1
+
 public class MinSubArrayWithKDistinctCharacter {
 
     public String min(String string, int k) {
