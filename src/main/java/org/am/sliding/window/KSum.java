@@ -7,6 +7,9 @@ import java.util.List;
  * Find the sum of all k length subarrays
  *
  * Sliding window technique : Fixed window
+ *
+ * start = 0, end = start + 2
+ * sum of subarray = sum of previous subarray + new element - old element
  */
 public class KSum {
 
