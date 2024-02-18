@@ -1,4 +1,4 @@
-package org.others;
+package org.am.others;
 
 import java.util.LinkedList;
 import java.util.List;

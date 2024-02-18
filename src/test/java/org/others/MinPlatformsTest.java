@@ -1,5 +1,6 @@
 package org.others;
 
+import org.am.others.MinPlatforms;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
