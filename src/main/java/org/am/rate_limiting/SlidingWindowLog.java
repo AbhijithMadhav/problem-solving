@@ -9,7 +9,7 @@ public class SlidingWindowLog {
     private final int allowedRequestsPerWindow;
 
     // Since method access is synchronized this need not be a concurrent hashMap
-    private final Map<Request, Set<Timestamp>> requestTimeStampsByRequest = new HashMap<>();
+    private final Map<ClientId, Set<Timestamp>> requestTimeStampsByRequest = new HashMap<>();
     private final Lock lock = new ReentrantLock(true);
 
     public SlidingWindowLog(long windowSizeMs, int allowedRequestsPerWindow) {
@@ -17,26 +17,26 @@ public class SlidingWindowLog {
         this.allowedRequestsPerWindow = allowedRequestsPerWindow;
     }
 
-    public boolean allowRequest(Request request, Timestamp requestTimeStamp) {
+    public boolean allowRequest(ClientId clientId, Timestamp requestTimeStamp) {
         try {
             // Since the request if user based don't expect too much contention
             lock.lock();
-            return synchronizedCheck(request, requestTimeStamp);
+            return synchronizedCheck(clientId, requestTimeStamp);
         } finally {
             lock.unlock();
         }
     }
 
-    private boolean synchronizedCheck(Request request, Timestamp requestTimeStamp) {
+    private boolean synchronizedCheck(ClientId clientId, Timestamp requestTimeStamp) {
         int count = 0;
-        Set<Timestamp> requestTimeStamps = requestTimeStampsByRequest.get(request);
+        Set<Timestamp> requestTimeStamps = requestTimeStampsByRequest.get(clientId);
         if(requestTimeStamps == null) {
             // When there are multiple threads getting requests from the same user the requests timestamps will not be monotonically increasing
             // Hence need a TreeSet instead of a simple list
             requestTimeStamps = new TreeSet<>(
                     Comparator.comparingLong(Timestamp::epochMilli)
             );
-            requestTimeStampsByRequest.put(request, requestTimeStamps);
+            requestTimeStampsByRequest.put(clientId, requestTimeStamps);
         } else {
             // Length of list is bounded by 'allowedRequestsPerWindow'
             Iterator<Timestamp> iterator = requestTimeStamps.iterator();
@@ -49,7 +49,7 @@ public class SlidingWindowLog {
                 }
             }
         }
-        System.out.println("Requests in window for " + request + "(" + requestTimeStamp + ") : " + count);
+        System.out.println("Requests in window for " + clientId + "(" + requestTimeStamp + ") : " + count);
         boolean allowRequest = count <= allowedRequestsPerWindow - 1;
         if (allowRequest) {
             requestTimeStamps.add(requestTimeStamp);
