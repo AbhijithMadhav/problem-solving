@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class SlidingWindow {
+public class SlidingWindow implements RateLimiter {
 
-    private final Map<ClientId, Window> windowByClientId = new HashMap<>();
+    private final Map<Client, Window> windowByClientId = new HashMap<>();
     private final int windowSizeMs;
     private final int maxRequests;
 
@@ -18,21 +18,22 @@ public class SlidingWindow {
         this.maxRequests = maxRequests;
     }
 
-    public boolean allowRequest(ClientId clientId, Timestamp requestTimestamp) {
+    @Override
+    public boolean allowRequest(Client client, Timestamp requestTimestamp) {
         try {
             // Since the request if user based don't expect too much contention
             lock.lock();
-            return synchronizedCheck(clientId, requestTimestamp);
+            return synchronizedCheck(client, requestTimestamp);
         } finally {
             lock.unlock();
         }
     }
 
-    public boolean synchronizedCheck(ClientId clientId, Timestamp requestTimestamp) {
-        Window window = windowByClientId.get(clientId);
+    public boolean synchronizedCheck(Client client, Timestamp requestTimestamp) {
+        Window window = windowByClientId.get(client);
         if (window == null || requestTimestamp.epochMilli() > window.startTime.epochMilli() + windowSizeMs) {
             window = new Window(requestTimestamp);
-            windowByClientId.put(clientId, window);
+            windowByClientId.put(client, window);
         }
         // Determine available capacity based on how much of the window has passed
         // Allow or disallow based on that capacity
