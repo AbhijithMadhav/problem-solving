@@ -1,9 +1,7 @@
 package org.am.rate_limiting;
 
-import org.am.rate_limiting.SlidingWindowLog.Request;
 import org.junit.jupiter.api.Test;
 
-import static org.am.rate_limiting.SlidingWindowLog.Timestamp;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

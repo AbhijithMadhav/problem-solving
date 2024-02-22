@@ -34,7 +34,7 @@ public class SlidingWindowLog {
             // When there are multiple threads getting requests from the same user the requests timestamps will not be monotonically increasing
             // Hence need a TreeSet instead of a simple list
             requestTimeStamps = new TreeSet<>(
-                    Comparator.comparingLong( timestamp -> timestamp.epochMilli)
+                    Comparator.comparingLong(Timestamp::epochMilli)
             );
             requestTimeStampsByRequest.put(request, requestTimeStamps);
         } else {
@@ -42,7 +42,7 @@ public class SlidingWindowLog {
             Iterator<Timestamp> iterator = requestTimeStamps.iterator();
             while(iterator.hasNext()) {
                 Timestamp ts = iterator.next();
-                if (ts.epochMilli >= requestTimeStamp.epochMilli - windowSizeMs) {
+                if (ts.epochMilli() >= requestTimeStamp.epochMilli() - windowSizeMs) {
                     count++;
                 } else {
                     iterator.remove();
@@ -57,7 +57,4 @@ public class SlidingWindowLog {
         return allowRequest;
     }
 
-    public record Request(String identity) {}
-
-    public record Timestamp(Long epochMilli) {}
 }
