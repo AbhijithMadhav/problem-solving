@@ -7,7 +7,7 @@ public class RE {
         return isMatch(s, 0, p, 0, cache);
     }
 
-    public boolean isMatch(String s, int i, String p, int j, Boolean[][] cache) {
+    private boolean isMatch(String s, int i, String p, int j, Boolean[][] cache) {
 
         if (i >= s.length() && j >= p.length())
             return true;
