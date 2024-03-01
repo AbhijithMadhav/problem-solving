@@ -1,4 +1,4 @@
-package org.am.concurrency.lru.cache;
+package org.am.cache;
 
 import java.util.Deque;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 public class MRUCache<K, V> {
 
     private final int size;
-    private Map<K, V> map;
+    private final Map<K, V> map;
     private final Deque<K> dll;
     public MRUCache(int size) {
         this.size = size;

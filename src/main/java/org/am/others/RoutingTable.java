@@ -1,4 +1,4 @@
-package org.am;
+package org.am.others;
 
 
 import java.util.HashMap;

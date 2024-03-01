@@ -1,4 +1,4 @@
-package org.am.concurrency.lru.cache;
+package org.am.cache;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class LRUCache<K, V> {
     public LRUCache(int size) {
         this.size = size;
         map = new HashMap<>(size);
-        LRUList = new LRUList<>(size);
+        LRUList = new LRUList<>();
     }
 
     public V get(K key) {
@@ -59,7 +59,7 @@ public class LRUCache<K, V> {
     private static class LRUList<K> {
         private final LinkedList<K> dll;
 
-        private LRUList(int size) {
+        private LRUList() {
             this.dll = new LinkedList<>();
         }
 
