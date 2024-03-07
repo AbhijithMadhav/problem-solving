@@ -1,9 +1,9 @@
-package org.others;
+package org.am.trie;
 
-import org.am.others.Trie;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrieTest {
 

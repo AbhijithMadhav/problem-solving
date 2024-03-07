@@ -1,4 +1,4 @@
-package org.am.others;
+package org.am.trie;
 
 
 import java.util.HashMap;
