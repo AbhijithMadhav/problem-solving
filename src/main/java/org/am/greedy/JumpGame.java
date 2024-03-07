@@ -1,4 +1,4 @@
-package org.am.dp;
+package org.am.greedy;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package org.am.dp;
+package org.am.others;
 
 /**
  * Two points to note

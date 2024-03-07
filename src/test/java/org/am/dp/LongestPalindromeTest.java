@@ -1,5 +1,6 @@
 package org.am.dp;
 
+import org.am.others.LongestPalindrome;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
