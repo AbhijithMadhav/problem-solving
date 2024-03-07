@@ -1,9 +1,8 @@
-package org.sliding.window;
+package org.am.sliding.window;
 
-import org.am.sliding.window.SmallestSubArrayWithSumGreaterThanK;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class SmallestSubArrayWithSumGreaterThanKTest {
 

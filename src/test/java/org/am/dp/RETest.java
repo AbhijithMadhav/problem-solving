@@ -1,9 +1,9 @@
-package org.others;
+package org.am.dp;
 
-import org.am.dp.RE;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RETest {
 

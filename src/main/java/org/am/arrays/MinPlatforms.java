@@ -1,4 +1,4 @@
-package org.am.others;
+package org.am.arrays;
 
 import java.util.Comparator;
 import java.util.LinkedList;

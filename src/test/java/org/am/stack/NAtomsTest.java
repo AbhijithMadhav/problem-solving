@@ -1,9 +1,8 @@
-package org.others;
+package org.am.stack;
 
-import org.am.stack.NAtoms;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NAtomsTest {
 

@@ -1,9 +1,8 @@
-package org.am.dp;
+package org.am.string;
 
-import org.am.others.LongestPalindrome;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LongestPalindromeTest {
 
