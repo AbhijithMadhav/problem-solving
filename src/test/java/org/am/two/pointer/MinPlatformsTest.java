@@ -1,4 +1,4 @@
-package org.am.arrays;
+package org.am.two.pointer;
 
 import org.junit.jupiter.api.Test;
 
