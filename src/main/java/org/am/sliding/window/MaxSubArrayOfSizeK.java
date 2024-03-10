@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 /**
  * Find max sub array of size k
- *
  * Fixed window
  */
 public class MaxSubArrayOfSizeK {
@@ -17,11 +16,11 @@ public class MaxSubArrayOfSizeK {
         // for all possible subarray of size k calculate sum : running sum
         // compare against max found so far
         // replace max with running sum if later is greater
-        int max = Integer.MIN_VALUE;
+        int runningSum = Arrays.stream(array, 0, k).sum();
+        int max = runningSum;
         int maxStart = 0;
-        int runningSum = 0;
-        for (int start = 0; start + k - 1 < array.length; start++) {
-            runningSum = getRunningSum(array, start, start + k - 1, runningSum);
+        for (int start = 1; start + k - 1 < array.length; start++) {
+            runningSum = runningSum - array[start - 1] + array[start + k -1];
             if (runningSum > max) {
                 max = runningSum;
                 maxStart = start;
@@ -29,11 +28,5 @@ public class MaxSubArrayOfSizeK {
         }
 
         return Arrays.stream(array, maxStart, maxStart + k).toArray();
-    }
-
-    private int getRunningSum(int[] array, int start, int end, int previousSubArraySum) {
-        return start == 0
-                ? Arrays.stream(array, start, end + 1).sum()
-                : previousSubArraySum - array[start - 1] + array[end];
     }
 }
