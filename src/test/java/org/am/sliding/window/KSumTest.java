@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class KSumTest {
 
-
-
     @Test
     public void ksumTest() {
         Integer[] actual = KSum.ksum(new int[]{1, 2, 3, 4, 5, 6}, 3);
