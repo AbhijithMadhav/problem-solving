@@ -1,57 +1,25 @@
 package org.am.sliding.window;
 
-import java.util.Arrays;
-
 /**
- * Find the smallest subarray with sum greater than or equal to k
- * dynamic window needed
- *
- * array : 1, 6, 5, 3, 8, 2, -1
- * For k = 10, [6,5] . Consider the left most in case of two solutions
- *
- * Brute force solution : Find all possible subarrays. Then find the smallest one amongst them
- * No. of possible subarrays : n + (n-1) + (n - 2) + ... + 1 = O(n^2)
- *
+ * Given an array of positive integers nums and a positive integer target, return the minimal length of a
+ * subarray
+ * whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
  */
 public class SmallestSubArrayWithSumGreaterThanK {
 
-    public int[] smallestSubArrayWithSumK(int[] array, int k) {
 
-        // Dynamic window
-        // grow the window until sum of subarray is >= k
-        // now reduce the window to size 1 and check if there was a smaller subarray with sum = k
-        // Do the same to subarrays starting from every char of the given array
+    public int minSubArrayLen(int target, int[] nums) {
+        int len = nums.length + 1;
 
-        int minStart = 0;
-        int minEnd = array.length;
-        boolean found = false;
-        for (int start = 0, end = 0, runningSum = 0; start < array.length; ) {
-            if (start >= end) {
-                end = start;
-                runningSum = array[start];
-            }
-
-            if (runningSum < k) {
-                if (end < array.length - 1) {
-                    end++;
-                    runningSum += array[end];
-                } else {
-                    runningSum -= array[start];
-                    start++;
-                }
-            } else {
-                if (end - start + 1 < minEnd - minStart + 1) {
-                    found = true;
-                    minStart = start;
-                    minEnd = end;
-                }
-                runningSum -= array[start];
-                start++;
+        int total = 0;
+        for (int r = 0, l = 0; r < nums.length; r++) {
+            total += nums[r];
+            while (total >= target) {
+                len = Math.min(len, r - l + 1);
+                total -= nums[l];
+                l++;
             }
         }
-
-        return found
-                ? Arrays.stream(array, minStart, minEnd + 1).toArray()
-                : new int[]{};
+        return len < nums.length + 1 ? len : 0;
     }
 }
