@@ -9,8 +9,10 @@ public class MaxSubArray {
             assert r >= l;
             sum += nums[r];
             maxSum = Math.max(sum, maxSum);
-            while(sum < 0)
-                sum -= nums[l++];
+            if (sum < 0)
+                sum = 0;
+            //while(sum < 0)
+                //sum -= nums[l++];
         }
         return maxSum;
     }
