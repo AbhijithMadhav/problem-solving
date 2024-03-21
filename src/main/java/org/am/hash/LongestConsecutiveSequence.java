@@ -16,6 +16,7 @@ public class LongestConsecutiveSequence {
 
         int maxSequenceLength = 0;
         for (int num : nums) {
+            // removing an element which is a part of the sequence avoids computation
             map.computeIfPresent(num, (k, v) -> v > 1 ? v - 1 : null);
 
             int sequenceCount = 1;
