@@ -1,8 +1,8 @@
-package org.am.sliding.window;
+package org.am.greedy;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MaxSubArrayTest {
 
