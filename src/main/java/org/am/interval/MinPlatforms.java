@@ -1,4 +1,4 @@
-package org.am.two.pointer;
+package org.am.interval;
 
 import java.util.Comparator;
 import java.util.LinkedList;
