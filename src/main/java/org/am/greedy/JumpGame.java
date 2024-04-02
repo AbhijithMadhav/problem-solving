@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * You are given an integer array nums. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.
+ * Return true if you can reach the last index, or false otherwise.
+ */
 public class JumpGame {
 
     private final Map<Integer, Boolean> canJump = new HashMap<>();
@@ -14,7 +18,21 @@ public class JumpGame {
         return canJumpGreedy(nums);
     }
 
-    // O9n^2
+
+    // O(n)
+    // The crux is to see that the problem can be reduced
+    // Say the (n - 1)th location can be reached from some i < n - 1
+    // Now the problem is to reach i from some j < i
+    public boolean canJumpGreedy(int[] nums) {
+        int targetIndex = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] >= targetIndex - i)
+                targetIndex = i;
+        }
+        return targetIndex == 0;
+    }
+
+    // O(n^2)
     private boolean canJumpMemoized(int[] nums, int lastIndex) {
         int length = lastIndex + 1;
         if (length > 1 && nums[0] < 1)
@@ -49,15 +67,5 @@ public class JumpGame {
             }
         }
         return false;
-    }
-
-    // O(n)
-    public boolean canJumpGreedy(int[] nums) {
-        int targetIndex = nums.length - 1;
-        for (int i = nums.length - 2; i >= 0; i--) {
-            if (nums[i] >= targetIndex - i)
-                targetIndex = i;
-        }
-        return targetIndex == 0;
     }
 }
