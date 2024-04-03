@@ -12,17 +12,14 @@ package org.am.tree;
 public class ValidBinarySearchTree {
 
     public boolean isValidBST(TreeNode root) {
-        if (root.left != null) {
-            if (root.left.val >= root.val)
-                return false;
-            if (!isValidBST(root.left))
-                return false;
-        }
-        if (root.right != null) {
-            if (root.right.val <= root.val)
-                return false;
-            return isValidBST(root.right);
-        }
-        return true;
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean isValidBST(TreeNode node, long minConstraint, long maxConstraint) {
+        if (node == null)
+            return true;
+        if (node.val > minConstraint && node.val < maxConstraint)
+            return isValidBST(node.left, minConstraint, node.val) && isValidBST(node.right, node.val, maxConstraint);
+        return false;
     }
 }
