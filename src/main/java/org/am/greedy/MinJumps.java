@@ -16,13 +16,17 @@ import java.util.Map;
  */
 public class MinJumps {
 
-    private final Map<Integer, Integer> minJumpsByIndex = new HashMap<>();
-
     public int jump(int[] nums) {
         //return jumpWithMemoization(nums, nums.length);
         return jumpGreedy(nums);
     }
 
+    /*
+     * Its a given that the jump to the last element can be made
+     * Now the idea is to check the furthest one can jump. say x positions
+     * Now to decide to which of those x positions the jump has to be made a determination of which of those x
+     * TODO
+     */
     private int jumpGreedy(int[] nums) {
         int l = 0, r = 0;
         int steps = 0;
@@ -44,6 +48,7 @@ public class MinJumps {
         return farthestIndex;
     }
 
+    private final Map<Integer, Integer> minJumpsByIndex = new HashMap<>();
     // return count of min jumps to nums[nums.length - 1]
     private int jumpWithMemoization(int[] nums, int length) {
 
