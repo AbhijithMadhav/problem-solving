@@ -2,25 +2,19 @@ package org.am.dp.twoD;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+/**
+ * You are given an integer array coins representing coins of different denominations and an integer amount
+ * representing a total amount of money.
+ * Return the number of combinations that make up that amount.
+ * If that amount of money cannot be made up by any combination of the coins, return 0.
+ * You may assume that you have an infinite number of each kind of coin.
+ * The answer is guaranteed to fit into a signed 32-bit integer.
+ */
 public class CoinChangeCount {
 
     private final Map<Key, Integer> cache = new HashMap<>();
-    private record Key(int amount, int i){
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Key key = (Key) o;
-            return amount == key.amount && i == key.i;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(amount, i);
-        }
-    }
+    private record Key(int amount, int i) {}
 
     public int change(int amount, int[] coins) {
         if (amount == 0)
