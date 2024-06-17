@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MaxSubArrayWithDistinctCharactersTest {
+class MaxSubStringWithDistinctCharactersTest {
 
     @Test
     void lengthOfLongestSubstring() {
-        MaxSubArrayWithDistinctCharacters obj = new MaxSubArrayWithDistinctCharacters();
+        MaxSubStringWithDistinctCharacters obj = new MaxSubStringWithDistinctCharacters();
         assertEquals(0, obj.lengthOfLongestSubstring(""));
         assertEquals(1, obj.lengthOfLongestSubstring("aaaaa"));
         assertEquals(3, obj.lengthOfLongestSubstring("abcabc"));

@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MinSubArrayWithKDistinctCharacterTest {
+class MinSubStringWithKDistinctCharactersTest {
 
     @Test
     void min() {
-        MinSubArrayWithKDistinctCharacter obj = new MinSubArrayWithKDistinctCharacter();
+        MinSubStringWithKDistinctCharacters obj = new MinSubStringWithKDistinctCharacters();
         assertEquals("AH", obj.min("AAAHHIBC", 2));
         assertEquals("HIB", obj.min("AAAHHIBC", 3));
         //assertEquals("", obj.min("AAAHHIIIIIIIIIIBCCCCCCCCCCCC", 0));

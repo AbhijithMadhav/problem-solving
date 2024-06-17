@@ -13,14 +13,20 @@ public class LongestSubstringWithReplacement {
     public int characterReplacement(String s, int k) {
 
         int res = 0;
+        // count of characters in the current window
         Map<Character, Integer> countMap = new HashMap<>();
+
+        // Examine substrings formed by current window
         for (int r = 0, l = 0; r < s.length(); r++) {
-            countMap.compute(s.charAt(r), (key, v) -> v == null ? 1 : v + 1);
-            while((r - l + 1) - curMaxCharCount(countMap) > k) {
+            countMap.compute(s.charAt(r), (key, value) -> value == null ? 1 : value + 1);
+            int curWinLength = r - l + 1;
+            // Crux :
+            //  Substring can have same chars with minimum replacement if the non-max chars are replaced
+            while(curWinLength - curMaxCharCount(countMap) > k) {
                 countMap.computeIfPresent(s.charAt(l), (key, value) -> value - 1);
                 l++;
             }
-            res = Math.max(res, r - l + 1);
+            res = Math.max(res, curWinLength);
         }
         return res;
     }
