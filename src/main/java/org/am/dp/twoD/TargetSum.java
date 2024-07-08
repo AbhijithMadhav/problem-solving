@@ -2,7 +2,6 @@ package org.am.dp.twoD;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * You are given an integer array nums and an integer target.
@@ -12,20 +11,7 @@ import java.util.Objects;
  */
 public class TargetSum {
 
-    private record Pair(int start, int target) {
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Pair pair = (Pair) o;
-            return start == pair.start && target == pair.target;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(start, target);
-        }
-    }
+    private record Pair(int start, int target) { }
 
     private final Map<Pair, Integer> cache = new HashMap<>();
     public int findTargetSumWays(int[] nums, int target) {

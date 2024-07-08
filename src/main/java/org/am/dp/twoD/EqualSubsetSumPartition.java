@@ -61,8 +61,6 @@ public class EqualSubsetSumPartition {
         recursiveCallCount++;
         //System.out.println("cachedCanPartition(" + i + ",  " + sum + ")");
 
-
-
         // if (sum - nums[i] > 0) {
         boolean canPartitionByIncludingIthElement = cachedCanPartition(nums, i + 1, sum - nums[i]);
         cache.put(new Key(i + 1, sum - nums[i]), canPartitionByIncludingIthElement);
