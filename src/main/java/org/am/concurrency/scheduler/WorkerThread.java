@@ -30,11 +30,11 @@ class WorkerThread extends Thread {
                 getJobFromQueue().ifPresentOrElse(job -> {
                     System.out.println(this + " : " + job + " executing...");
                     job.run();
-                }, () -> { // to reduce busy waiting
+                }, () -> { // to reduce busy waiting due to a job whose time has not come
                     try {
                         sleep(Duration.ofMillis(1000));
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        throw new RuntimeException("Thread was interrupted while sleeping to avoid busy waiting", e);
                     }
                 });
             } catch (InterruptedException e) {
