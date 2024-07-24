@@ -1,4 +1,4 @@
-package org.am.graphs;
+package org.am.graphs.dfs;
 
 import org.junit.jupiter.api.Test;
 

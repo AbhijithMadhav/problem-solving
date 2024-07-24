@@ -1,9 +1,10 @@
-package org.am.graphs;
+package org.am.graphs.bfs;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
 /**
+ * <a href="https://leetcode.com/problems/course-schedule/">...</a>
  * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
  * You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take
  * course bi first if you want to take course ai.
@@ -29,13 +30,13 @@ public class CourseScheduleBFS {
         /// Find if cycle exists in the graph.
         // Since there can be multiple disjointed graphs, the check has to be done starting all verticies
         for (int start : adjMap.keySet()) {
-            if (!visited.contains(start) && hasCycle(start))
+            if (!visited.contains(start) && hasCycleBFS(start))
                 return false;
         }
         return true;
     }
 
-    public boolean hasCycle(int start) {
+    public boolean hasCycleBFS(int start) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start);
         visited.add(start);

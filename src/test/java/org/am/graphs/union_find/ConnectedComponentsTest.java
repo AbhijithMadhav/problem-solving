@@ -1,4 +1,4 @@
-package org.am.graphs;
+package org.am.graphs.union_find;
 
 import org.junit.jupiter.api.Test;
 

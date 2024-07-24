@@ -1,6 +1,7 @@
-package org.am.graphs;
+package org.am.graphs.union_find;
 
 /**
+ * <a href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/">...</a>
  * You have a graph of n nodes. You are given an integer n and an array of edges. Return the number of
  * connected components
  */
