@@ -1,6 +1,9 @@
 package org.am.binary.search;
 
 
+/**
+ * <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/description/">...</a>
+ */
 public class SearchInRotatedArray {
 
     public int search(int[] nums, int target) {
