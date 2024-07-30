@@ -1,5 +1,8 @@
 package org.am.tree;
 
+/**
+ * <a href="https://leetcode.com/problems/balanced-binary-tree/submissions/1338286820/">...</a>
+ */
 public class BalancedBST {
 
     private record Result(boolean isBalanced, int height){}
