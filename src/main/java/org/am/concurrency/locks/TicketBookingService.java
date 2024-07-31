@@ -1,37 +1,45 @@
-package org.am.concurrency.semaphores;
-
+package org.am.concurrency.locks;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 
 public class TicketBookingService {
 
-    private final Semaphore tickets;
+    private int tickets;
+    private final Lock lock = new ReentrantLock(true);
 
     public TicketBookingService(int tickets) {
-        this.tickets = new Semaphore(tickets);
+        this.tickets = tickets;
     }
 
-    public boolean book(int nTickets) {
-        if ( nTickets < 1 || nTickets > 2)
+    public boolean book(int nRequests) {
+        if (nRequests < 1 || nRequests > 2)
             return false;
-        try {
-            // So that there is no blocking
-            if (!tickets.tryAcquire(nTickets))
+
+        lock.lock();
+        if (tickets - nRequests >= 0) {
+            tickets -= nRequests;
+            lock.unlock();
+            try {
+                processPayments();
+                return true;
+            } catch (Exception e) {
+                lock.lock();
+                tickets += nRequests;
+                lock.unlock();
                 return false;
-            processPayment();
-        } catch(Exception ex) {
-            tickets.release(nTickets);
-            return false;
+            }
         }
-        return true;
+        lock.unlock();
+        return false;
     }
 
-    private void processPayment() throws InterruptedException {
+    private void processPayments() throws InterruptedException {
         Thread.sleep(1000);
     }
 
