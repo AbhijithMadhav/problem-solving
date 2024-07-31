@@ -1,4 +1,4 @@
-package org.am.concurrency.scheduler;
+package org.am.concurrency.locks.scheduler;
 
 import java.time.Duration;
 import java.util.stream.IntStream;
@@ -10,7 +10,7 @@ public class Application {
         jobScheduler.submit(new DefaultJob(System.currentTimeMillis() + 1000));
         IntStream.range(0, 25).forEach(i -> jobScheduler.submit(new DefaultJob(System.currentTimeMillis() + i)));
         jobScheduler.submit(new DefaultJob(Duration.ofMillis(5000)));
-        //Thread.sleep(5000);
-        //jobScheduler.shutdown();
+        Thread.sleep(5000);
+        jobScheduler.shutdown();
     }
 }

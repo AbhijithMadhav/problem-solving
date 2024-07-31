@@ -1,4 +1,4 @@
-package org.am.concurrency.print;
+package org.am.concurrency.wait_notify.print;
 
 public class EvenOdd {
 

@@ -1,4 +1,4 @@
-package org.am.concurrency.dining_philosophers;
+package org.am.concurrency.semaphores.dining_philosophers;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;

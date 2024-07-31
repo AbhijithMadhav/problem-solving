@@ -1,4 +1,4 @@
-package org.am.concurrency.scheduler;
+package org.am.concurrency.locks.scheduler;
 
 
 import java.util.*;

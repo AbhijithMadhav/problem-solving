@@ -1,4 +1,4 @@
-package org.am.concurrency.sleeping_barber;
+package org.am.concurrency.semaphores.sleeping_barber;
 
 import java.time.Duration;
 import java.util.Optional;

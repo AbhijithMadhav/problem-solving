@@ -1,4 +1,4 @@
-package org.am.concurrency.scheduler;
+package org.am.concurrency.locks.scheduler;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -15,15 +15,6 @@ public class DefaultJob implements Job {
         this.priority = priority;
         this.startsAt = startsAt;
         this.interval = interval;
-    }
-
-    public DefaultJob(int priority, long startsAt) {
-        this.priority = priority;
-        this.startsAt = startsAt;
-    }
-
-    public DefaultJob(int priority) {
-        this.priority = priority;
     }
 
     public DefaultJob(long startsAt) {

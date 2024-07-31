@@ -1,4 +1,4 @@
-package org.am.concurrency.sleeping_barber;
+package org.am.concurrency.semaphores.sleeping_barber;
 
 class Customer implements Runnable {
 
