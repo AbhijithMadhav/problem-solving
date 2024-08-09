@@ -9,8 +9,7 @@ public class DiameterOfBinaryTree {
             return 0;
         int diameterOfLeft = diameterOfBinaryTree(root.left);
         int diameterOfRight = diameterOfBinaryTree(root.right);
-        int diameter = (root.left == null ? 0 : depth(root.left) )
-                + (root.right == null ? 0 : depth(root.right) + 1);
+        int diameter = depth(root.left) +depth(root.right);
         return Math.max(diameter, Math.max(diameterOfLeft, diameterOfRight));
     }
 
