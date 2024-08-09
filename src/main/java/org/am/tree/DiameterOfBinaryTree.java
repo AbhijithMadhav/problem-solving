@@ -1,5 +1,8 @@
 package org.am.tree;
 
+/**
+ * <a href="https://leetcode.com/problems/diameter-of-binary-tree/">...</a>
+ */
 public class DiameterOfBinaryTree {
 
     // w.r.t to a node the longest path which passes through it is the depth of its left subtree plus the depth
