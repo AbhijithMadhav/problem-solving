@@ -1,4 +1,4 @@
-package org.am.graphs;
+package org.am.graphs.bfs;
 
 import java.util.*;
 
