@@ -41,28 +41,30 @@ public class ConnectedComponents {
             height[i] = 1;
         }
         int count = n;
-
-
         for (int[] edge : edges) {
             int p = edge[0];
             int q = edge[1];
-            int pRoot = findQU(p, id);
-            int qRoot = findQU(q, id);
-            if (pRoot == qRoot)
-                continue;
-            if (height[qRoot] < height[pRoot]) {
-                id[q] = pRoot;
-                height[p] = height[q] + 1;
-            } else {
-                id[p] = qRoot;
-                height[q] = height[p] + 1;
-            }
+            quickUnion(height, id, q, p);
             count--;
         }
         return count;
     }
 
-    private int findQU(int v, int[] component) {
+    private static void quickUnion(int[] height, int[] id, int q, int p) {
+        int pRoot = findQU(p, id);
+        int qRoot = findQU(q, id);
+        if (pRoot == qRoot)
+            return;
+        if (height[qRoot] < height[pRoot]) {
+            id[q] = pRoot;
+            height[p] = height[q] + 1;
+        } else {
+            id[p] = qRoot;
+            height[q] = height[p] + 1;
+        }
+    }
+
+    private static int findQU(int v, int[] component) {
         while(v != component[v]) {
             component[v] = component[component[v]];
             v = component[v];

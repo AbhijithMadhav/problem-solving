@@ -14,7 +14,7 @@ processed atomically to enable the correct increment of the 'length' variable.
 Construction of an adjacency list representing this graph is not straight forward due to the nature of the edges. 
 
 One way to go about this is an O(n^2) double loop over all the genes to determine the neighbors for each gene node.
-Assuming a word length of m, though it is 8 in this case, the complexity would be O(m * n^2).
+Assuming a word length of m, which it is 8 in this case, the complexity would be O(m * n^2).
 
 The BFS would take a further O(n) making the overall complexity to be O(m * n^2). Given that n is small, lesser than 10,
 the quadratic complexity is bearable

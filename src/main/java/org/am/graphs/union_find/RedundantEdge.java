@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * <a href="https://leetcode.com/problems/redundant-connection/description/">...</a>
  */
-// The crux is in recognizing that in order to return the last inputted edge of a cycle we would need an algo
+// The crux is in recognizing that in order to return the last inputted edge of a cycle, we would need an algo
 // which would scan the edges in a given order
 // With DFS the scanning follows the transitive nature of connectedness of edges and won't serve the purpose
 // With Union-Find we can scan the edges in the input order and detect a cycle if a find operation shows that
@@ -28,7 +28,7 @@ public class RedundantEdge {
         for (int[] edge : edges) {
             int v = edge[0];
             int w = edge[1];
-            // If the vertices already belong to the same component then we have a cycle
+            // If the vertices already belong to the same component, then we have a cycle
             if (find(v) == find(w))
                 return edge;
             quickUnion(v, w);

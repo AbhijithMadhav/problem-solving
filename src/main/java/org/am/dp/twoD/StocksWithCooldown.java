@@ -40,18 +40,5 @@ public class StocksWithCooldown {
         }
     }
 
-    private record Key(int i, boolean buy){
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Key key = (Key) o;
-            return i == key.i && buy == key.buy;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(i, buy);
-        }
-    }
+    private record Key(int i, boolean buy){ }
 }
