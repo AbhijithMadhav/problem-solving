@@ -1,6 +1,6 @@
 package org.am.back.tracking;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,25 +8,26 @@ import java.util.List;
  */
 public class GenerateParenthesis {
 
+    List<String> parenthesis = new ArrayList<>();
     public List<String> generateParenthesis(int n) {
-        return gen(n, 0, 0);
+        backtrack(n, 0, 0, "");
+        return parenthesis;
     }
 
-    private List<String> gen(int n, int open, int close) {
-        // Reached the leaf node. Return empty string so that valid parenthesis can be constructed
-        // while unwinding(traversing up the tree)
+    private void backtrack(int n, int open, int close, String currParenthesis) {
         if (open == n && close == n)
-            return List.of("");
+            parenthesis.add(currParenthesis);
 
-        List<String> parenthesis = new LinkedList<>();
-        if (open >= close && open < n) // valid condition to branch of with "("
-            parenthesis.addAll(
-                    gen(n, open + 1, close).stream().map(str -> "(" + str).toList()
-            );
-        if (open > close) // valid condition to branch of with ")"
-            parenthesis.addAll(
-                    gen(n, open, close + 1).stream().map(str ->  ")" + str).toList()
-            );
-        return parenthesis;
+        // There are 2 possibilities
+        if (open >= close && open < n) {// valid condition to branch of with "("
+            currParenthesis += '(';
+            backtrack(n, open + 1, close, currParenthesis);
+            currParenthesis = currParenthesis.substring(0, currParenthesis.length() - 1);
+        }
+        if (open > close) {
+            currParenthesis += ')';
+            backtrack(n, open, close + 1, currParenthesis);
+            currParenthesis = currParenthesis.substring(0, currParenthesis.length() - 1);
+        }
     }
 }

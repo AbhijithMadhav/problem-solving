@@ -1,4 +1,4 @@
-package org.am.greedy;
+package org.am.back.tracking;
 
 import org.junit.jupiter.api.Test;
 
