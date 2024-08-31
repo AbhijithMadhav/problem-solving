@@ -15,6 +15,7 @@ public class Permutations {
     }
 
     // index is the index of the starting number of the current permutation
+    // state is all the numbers included in the current path/branch
     private void backtrack(int[] nums, int index, Set<Integer> included, List<Integer> currPermutation) {
         if (index == nums.length) {
             permutations.add(new ArrayList<>(currPermutation));

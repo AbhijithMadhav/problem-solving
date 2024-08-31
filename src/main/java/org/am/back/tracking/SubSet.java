@@ -17,8 +17,12 @@ public class SubSet {
         return subsets;
     }
 
+    // index : Index of the starting element
     public void backtrack(int[] nums, int index, List<Integer> currentSubset) {
+        // solutions formed at each node
         subsets.add(new ArrayList<>(currentSubset));
+
+        // Branch for all subsets starting with subsequent elements
         for (int i = index; i < nums.length; i++) {
             currentSubset.addLast(nums[i]);
             backtrack(nums, i + 1, currentSubset);
