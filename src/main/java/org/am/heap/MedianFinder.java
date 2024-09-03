@@ -1,12 +1,12 @@
 package org.am.heap;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 class MedianFinder {
 
-    private final PriorityQueue<Integer> minPQ = new PriorityQueue<>(Comparator.comparingInt(o -> o));
-    private final PriorityQueue<Integer> maxPQ = new PriorityQueue<>(((o1, o2) -> o2 - o1));
+    private final PriorityQueue<Integer> minPQ = new PriorityQueue<>();
+    private final PriorityQueue<Integer> maxPQ = new PriorityQueue<>(Collections.reverseOrder());
 
     // The crux of a simple implementation is to insert into maxPQ first.
     // Now two movements might be necessary

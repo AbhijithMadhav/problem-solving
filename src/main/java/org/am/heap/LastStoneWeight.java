@@ -1,12 +1,13 @@
 package org.am.heap;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class LastStoneWeight {
 
     public int lastStoneWeight(int[] stones) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((s1, s2) -> s2 - s1);
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         Arrays.stream(stones).forEach(pq::add);
 
         while (!pq.isEmpty()) {
