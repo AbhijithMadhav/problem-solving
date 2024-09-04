@@ -1,40 +1,31 @@
 package org.am.cache;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
-public class MRUCache<K, V> {
+public class MRUCache {
 
     private final int size;
-    private final Map<K, V> map;
-    private final Deque<K> dll;
+    private final LinkedHashMap<Integer, Integer> map;
+
     public MRUCache(int size) {
         this.size = size;
-        map = new HashMap<>(size);
-        dll = new LinkedList<>();
+        map = new LinkedHashMap<>(size);
     }
 
-    public synchronized V get(K key) {
-        // put key to the end of the dll to imply that this has been used
+    public Integer get(Integer key) {
+        Integer value = -1;
         if (map.containsKey(key)) {
-            dll.remove(key);
-            dll.addLast(key);
+            value = map.get(key);
+            // put key to the end of the dll to imply that this has been used recently
+            map.putLast(key, value);
         }
-        return map.get(key);
+        return value;
     }
 
-    public synchronized void put(K key, V value) {
-        if (!map.containsKey(key)) {
-            if (map.size() < size) {
-                dll.addLast(key);
-            } else {
-                map.remove(dll.removeLast());
-            }
-        }
-        map.put(key, value);
+    public void put(Integer key, Integer value) {
+        if (!map.containsKey(key) && map.size() >= size)
+            // remove the MRU entry
+            map.remove(map.lastEntry().getKey());
+        map.putLast(key, value);
     }
-
-
 }
