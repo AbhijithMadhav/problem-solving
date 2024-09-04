@@ -44,4 +44,21 @@ class LFUCacheTest {
         assertEquals(-1, lfuCache.get(1));
         assertEquals(1, lfuCache.get(2));
     }
+
+    @Test
+    public void lfuCacheTest4() {
+        LFUCache lfuCache = new LFUCache(2);
+        lfuCache.put(2, 1);
+        lfuCache.get(2);
+        lfuCache.get(2);
+        lfuCache.put(1, 1);
+        lfuCache.get(1);
+        lfuCache.get(1);
+
+        lfuCache.get(2);
+        lfuCache.get(2);
+        lfuCache.put(3, 1);
+        assertEquals(-1, lfuCache.get(1));
+        assertEquals(1, lfuCache.get(2));
+    }
 }

@@ -5,77 +5,69 @@ import java.util.*;
 public class LFUCache {
 
     private final int capacity;
-    private final Map<Integer, Value> valueMap = new HashMap<>();
-    private final Map<Integer, Deque<Value>> lfumap = new HashMap<>();
+    private final Map<Integer, ValueAndFreq> cache = new HashMap<>();
+    private final Map<Integer, LinkedHashSet<Integer>> freqMap = new HashMap<>();
 
-    private int lfuCount = Integer.MAX_VALUE;
+    private int minFreq = Integer.MAX_VALUE;
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
     }
 
     public int get(int k) {
-        int v = -1;
-        if (valueMap.containsKey(k)) {
-            Value value = valueMap.get(k);
-            v = value.value;
-            updateAccessCount(value);
-        }
-        return v;
+        if (!cache.containsKey(k))
+            return -1;
+        ValueAndFreq vf = cache.get(k);
+        updateAccessFrequency(k, vf);
+        return vf.value;
     }
 
     public void put(int k, int v) {
-        Value value;
-        if (valueMap.containsKey(k)) {
-            value = valueMap.get(k);
-            value.value = v;
+        ValueAndFreq vf;
+        if (cache.containsKey(k)) {
+            vf = cache.get(k);
+            vf.value = v;
         } else {
-            if (valueMap.size() == capacity) {
-                valueMap.remove(lfumap.get(lfuCount).removeLast().key);
-            }
-            value = new Value(k, v);
-            valueMap.put(k, value);
+            if (cache.size() == capacity)
+                evictLFU();
+            vf = new ValueAndFreq(v);
+            cache.put(k, vf);
         }
-        updateAccessCount(value);
+        updateAccessFrequency(k, vf);
     }
 
-    private void updateAccessCount(Value value) {
-        if (value.count > 0) {
-            // TODO : This is costly. Can optimize by implementing a custom linked list
-            lfumap.get(value.count).remove(value);
-            if (lfumap.get(value.count).isEmpty() && lfuCount == value.count)
-                lfuCount = value.count + 1;
-        }
-
-        value.count++;
-        Deque<Value> lfuList = lfumap.computeIfAbsent(value.count, k -> new LinkedList<>());
-        lfuList.addFirst(value);
-        if (lfuList.size() == 1 && lfuCount > value.count)
-            lfuCount = value.count;
+    private void evictLFU() {
+        cache.remove(freqMap.get(minFreq).removeLast());
     }
 
-    static class Value {
+    private void updateAccessFrequency(int k, ValueAndFreq vf) {
 
-        int key;
-        int value;
-        int count;
+        // Remove mapping from current frequency
+        if (vf.freq > 0) {
+            freqMap.get(vf.freq).remove(k);
+            if (freqMap.get(vf.freq).isEmpty())
+                freqMap.remove(vf.freq);
+        }
 
-        public Value(int key, int value) {
-            this.key = key;
+        // increment frequency
+        vf.freq++;
+        if (vf.freq == 1 // New access
+                || (!freqMap.containsKey(vf.freq - 1) && minFreq == vf.freq - 1)) // Tracked min freq ticket up
+            minFreq = vf.freq;
+
+
+        // Map to new incremented frequency
+        LinkedHashSet<Integer> values = freqMap.computeIfAbsent(vf.freq, key -> new LinkedHashSet<>());
+        values.addFirst(k);
+    }
+
+    private static class ValueAndFreq {
+
+        private int value;
+        private int freq;
+
+        public ValueAndFreq(int value) {
             this.value = value;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Value value1 = (Value) o;
-            return key == value1.key && value == value1.value;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(key, value);
         }
     }
 }
