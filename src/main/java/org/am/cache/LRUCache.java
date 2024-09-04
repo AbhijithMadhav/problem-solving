@@ -1,75 +1,35 @@
 package org.am.cache;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.LinkedHashMap;
 
 
-// Mutual exclusion : Taken care off
-// Starvation : Taken care off
-// Deadlocks : Taken care off
-// Progress :
-public class LRUCache<K, V> {
+/**
+ * <a href="https://leetcode.com/problems/lru-cache/description/">...</a>
+ */
+public class LRUCache {
 
     private final int size;
-    private final Map<K, V> map;
+    private final LinkedHashMap<Integer, Integer> map;
 
-    private final Lock lock = new ReentrantLock(true);
-
-    private final LRUList<K> LRUList;
     public LRUCache(int size) {
         this.size = size;
-        map = new HashMap<>(size);
-        LRUList = new LRUList<>();
+        map = new LinkedHashMap<>(size);
     }
 
-    public V get(K key) {
-        V value;
-        try {
-            lock.lock();
-            // put key to the end of the dll to imply that this has been used recently
-            if (map.containsKey(key)) {
-                LRUList.markAsAccessed(key);
-            }
-        } finally {
+    public Integer get(Integer key) {
+        Integer value = -1;
+        if (map.containsKey(key)) {
             value = map.get(key);
-            lock.unlock();
+            // put key to the end of the dll to imply that this has been used recently
+            map.putLast(key, value);
         }
         return value;
     }
 
-    public void put(K key, V value) {
-        try {
-            lock.lock();
-            if (!map.containsKey(key)) {
-                if (map.size() < size) {
-                    LRUList.markAsAccessed(key);
-                } else {
-                    map.remove(LRUList.evictLRU());
-                }
-            }
-            map.put(key, value);
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    private static class LRUList<K> {
-        private final LinkedList<K> dll;
-
-        private LRUList() {
-            this.dll = new LinkedList<>();
-        }
-
-        private void markAsAccessed(K key) {
-            dll.remove(key);
-            dll.addLast(key);
-        }
-
-        private K evictLRU() {
-            return dll.removeFirst();
-        }
+    public void put(Integer key, Integer value) {
+        if (!map.containsKey(key) && map.size() >= size)
+            // remove the LRU entry
+            map.remove(map.firstEntry().getKey());
+        map.putLast(key, value);
     }
 }
