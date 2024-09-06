@@ -3,6 +3,9 @@ package org.am.heap;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+/**
+ * <a href="https://leetcode.com/problems/find-median-from-data-stream/">...</a>
+ */
 class MedianFinder {
 
     private final PriorityQueue<Integer> minPQ = new PriorityQueue<>();

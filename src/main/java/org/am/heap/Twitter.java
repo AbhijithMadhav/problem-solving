@@ -2,6 +2,9 @@ package org.am.heap;
 
 import java.util.*;
 
+/**
+ * <a href="https://leetcode.com/problems/design-twitter/">...</a>
+ */
 public class Twitter {
 
     private static final int NUM_TWEETS_IN_TIMELINE = 10;

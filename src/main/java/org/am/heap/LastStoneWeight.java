@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+/**
+ * <a href="https://leetcode.com/problems/last-stone-weight/">...</a>
+ */
 public class LastStoneWeight {
 
     public int lastStoneWeight(int[] stones) {
