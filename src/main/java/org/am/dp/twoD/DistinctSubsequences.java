@@ -10,16 +10,10 @@ import java.util.Map;
  */
 public class DistinctSubsequences {
 
-    private record Index(int i, int j){}
-    private final Map<Index, Integer> cache = new HashMap<>();
-
     public int numDistinct(String s, String t) {
         return numDistinct(s, 0, t, 0);
     }
 
-    // don't try to infer semantics of the subproblem
-    // See the subproblem as a step in matching
-    // I have to match s[i] with t[j] and continue the matching in the search space which is a tree
     private int numDistinct(String s, int i, String t, int j) {
         if (j == t.length())
             return 1;
@@ -33,6 +27,8 @@ public class DistinctSubsequences {
 
     }
 
+    private record Index(int i, int j){}
+    private final Map<Index, Integer> cache = new HashMap<>();
     private int count(String s, int i , String t, int j) {
         Index key = new Index(i, j);
         if (!cache.containsKey(key))
