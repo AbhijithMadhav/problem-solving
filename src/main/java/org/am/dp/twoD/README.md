@@ -42,3 +42,24 @@ There are mxn possible combinations and for each combination there are 3 choices
   - This can be done two ways. By moving ahead in s or in t
 
 With memoization, only one recursive call per every pair of indexes is done. Hence complexity is `O(mn)`
+
+# Longest increasing path in a matrix
+
+## Formulation
+
+```text
+
+l[i,j] = length of longest path starting from i, j
+
+l[i, j] = max(
+                l[i + 1][j] iff l[i + 1][j] > l[i + 1][j] 0 otherwise, 
+                l[i - 1][j] iff l[i - 1][j] > l[i - 1][j] 0 otherwise, 
+                l[i][j + 1] iff l[i][j + 1] > l[i][j + 1] 0 otherwise, 
+                l[i][j - 1] iff l[i][j - 1] > l[i][j - 1] 0 otherwise
+             )
+```
+
+## Complexity
+There are 4 choices at every position in the matrix in the worst case. So the complexity is O(2<sup>mn</sup>)
+
+With memoization, there will be exactly 1 recursive call per position in the matrix. Complexity is O(mn)
