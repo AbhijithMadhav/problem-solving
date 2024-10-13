@@ -63,3 +63,15 @@ l[i, j] = max(
 There are 4 choices at every position in the matrix in the worst case. So the complexity is O(2<sup>mn</sup>)
 
 With memoization, there will be exactly 1 recursive call per position in the matrix. Complexity is O(mn)
+
+# Burst Balloons
+For each balloon to be burst the subproblems to its left and right have to be solved 
+
+## Formulation
+```text
+c[l, r] = Max(
+        c[l, i - 1] 
+       + nums[l - 1] * nums[i] * nums[r + 1] 
+       + c[i + 1, r]
+       )
+```
