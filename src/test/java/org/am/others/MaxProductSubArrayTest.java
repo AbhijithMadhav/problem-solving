@@ -1,4 +1,4 @@
-package org.am.dp;
+package org.am.others;
 
 import org.junit.jupiter.api.Test;
 

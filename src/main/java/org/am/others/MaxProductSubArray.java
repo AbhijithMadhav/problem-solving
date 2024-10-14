@@ -1,10 +1,10 @@
-package org.am.dp;
+package org.am.others;
 
 /**
- * Given an integer array nums, find a
- * subarray
+ * Given an integer array nums, find a subarray
  *  that has the largest product, and return the product.
  * The test cases are generated so that the answer will fit in a 32-bit integer.
+ * <a href="https://leetcode.com/problems/maximum-product-subarray/description/">...</a>
  */
 public class MaxProductSubArray {
     public int maxProductBruteForce(int[] nums) {
@@ -19,23 +19,23 @@ public class MaxProductSubArray {
         return maxProduct;
     }
 
-    // Very complicated
-    // Requires recognizing that the product can decrease and increase with the multiplicands being -ve or +ve
-    // In a linear scan of only +ve numbers the product would be increasing
-    // But when a -ve number is encountered the product can decrease. The max seen so far will become the min
+    // Very complicated.
+    // Requires recognizing that the product can decrease and increase with the multiplicands being -ve or +ve.
+    // In a linear scan of only +ve numbers, the product would be increasing.
+    // But when a -ve number is encountered, the product can decrease. The max seen so far will become the min
     // So we stop multiplying and we've got a subarray. We start with a new one
     // But if we get another -ve number the previous min multiplied with this will give a max.
     // So we maintain the max current subarray and the min current subarray
     public int maxProduct(int[] nums) {
-        int curMax = nums[0], curMin = nums[0], maxProduct = nums[0];
-        // curMax = max current subarray
-        // curMin = min current subarray
+        int curMaxProduct = nums[0], curMinProduct = nums[0], maxProduct = nums[0];
+        // curMaxProduct = max current subarray
+        // curMinProduct = min current subarray
         for (int i = 1; i < nums.length; i++) {
             int num = nums[i];
-            int tmp = curMax;
-            curMax = Math.max(num, Math.max(num * curMax, num * curMin));
-            curMin = Math.min(num, Math.min(num * tmp, num * curMin));
-            maxProduct = Math.max(maxProduct, Math.max(curMax, curMin));
+            int tmp = curMaxProduct;
+            curMaxProduct = Math.max(num, Math.max(num * curMaxProduct, num * curMinProduct));
+            curMinProduct = Math.min(num, Math.min(num * tmp, num * curMinProduct));
+            maxProduct = Math.max(maxProduct, Math.max(curMaxProduct, curMinProduct));
         }
         return maxProduct;
     }
