@@ -1,4 +1,4 @@
-package org.am.dp;
+package org.am.dp.twoD;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package org.am.dp;
+package org.am.dp.twoD;
 
 /**
  * <a href="https://leetcode.com/problems/regular-expression-matching/description/">...</a>

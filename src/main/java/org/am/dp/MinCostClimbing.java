@@ -3,9 +3,10 @@ package org.am.dp;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="https://leetcode.com/problems/min-cost-climbing-stairs/description/">...</a>
+ */
 public class MinCostClimbing {
-    private final Map<Integer, Integer> cache = new HashMap<>();
-
     public int minCostClimbingStairs(int[] cost) {
         return Math.min(minCostClimbingStairs(cost, 0), minCostClimbingStairs(cost, 1));
     }
@@ -13,15 +14,13 @@ public class MinCostClimbing {
     private int minCostClimbingStairs(int[] cost, int i) {
         if (i >= cost.length)
             return 0;
-        if (cache.containsKey(i))
-            return cache.get(i);
-        int plusOne = cache.containsKey(i + 1)
-                ? cache.get(i + 1)
-                : minCostClimbingStairs(cost, i + 1);
-        int plusTwo = cache.containsKey(i + 2)
-                ? cache.get(i + 2)
-                : minCostClimbingStairs(cost, i + 2);
-        cache.put(i, Math.min(cost[i] + plusOne, cost[i] + plusTwo));
+        return Math.min(cost[i] + cache(cost, i + 1), cost[i] + cache(cost, i + 2));
+    }
+
+    private final Map<Integer, Integer> cache = new HashMap<>();
+    private int cache(int[] cost, int i) {
+        if (!cache.containsKey(i))
+            cache.put(i, minCostClimbingStairs(cost, i));
         return cache.get(i);
     }
 }
