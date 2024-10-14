@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LongestIncreasingSubsequenceTest {
+class LISTest {
 
     @Test
     void lengthOfLIS() {
@@ -17,7 +17,7 @@ class LongestIncreasingSubsequenceTest {
         assertEquals(5, lis().lengthOfLIS(new int[] {2, 3, 1, 2, 1, 3, 4, 5}));
     }
 
-    private static LongestIncreasingSubsequence lis() {
-        return new LongestIncreasingSubsequence();
+    private static LIS lis() {
+        return new LIS();
     }
 }
