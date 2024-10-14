@@ -15,13 +15,14 @@ import java.util.Map;
  * Note that the grouping (1 11 06) is invalid because "06" cannot be mapped into 'F' since "6" is different from "06".
  * Given a string s containing only digits, return the number of ways to decode it.
  * The test cases are generated so that the answer fits in a 32-bit integer.
+ * <a href="https://leetcode.com/problems/decode-ways/description/">...</a>
  */
 public class Decode {
 
-    private final Map<Integer, Integer> cache = new HashMap<>();
     public int numDecodings(String s) {
         return numDecodings(s, 0);
     }
+
 
     // Number of encodings of s starting at position i
     private int numDecodings(String s, int i) {
@@ -47,6 +48,8 @@ public class Decode {
         cache.put(i, count1 + count2);
         return cache.get(i);
     }
+
+    private final Map<Integer, Integer> cache = new HashMap<>();
 
     private boolean isValidEncoding(String encoding) {
         if (encoding.startsWith("0"))
