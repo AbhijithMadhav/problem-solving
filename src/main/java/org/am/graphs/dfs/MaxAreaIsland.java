@@ -9,13 +9,14 @@ import java.util.Set;
 public class MaxAreaIsland {
 
     private record Coordinate(int x, int y){}
+    Set<Coordinate> visited = new HashSet<>();
+
     public int maxAreaOfIsland(int[][] grid) {
-        Set<Coordinate> visited = new HashSet<>();
         int max = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == 1 && !visited.contains(new Coordinate(i, j))) {
-                    int b = dfsArea(i, j, grid, visited);
+                    int b = dfsArea(i, j, grid);
                     max = Math.max(max, b);
                 }
             }
@@ -23,18 +24,23 @@ public class MaxAreaIsland {
         return max;
     }
 
-    private int dfsArea(int i, int j, int[][] grid, Set<Coordinate> visited) {
+    private int dfsArea(int i, int j, int[][] grid) {
         visited.add(new Coordinate(i, j));
         int area = 1;
-        if (i - 1 >= 0 && grid[i - 1][j] == 1 && !visited.contains(new Coordinate(i - 1, j)))
-            area += dfsArea(i - 1, j, grid, visited);
-        if (i + 1 < grid.length && grid[i + 1][j] == 1 && !visited.contains(new Coordinate(i + 1, j)))
-            area += dfsArea(i + 1, j, grid, visited);
-        if (j - 1 >= 0 && grid[i][j - 1] == 1 && !visited.contains(new Coordinate(i, j - 1)))
-            area += dfsArea(i, j - 1, grid, visited);
-        if (j + 1 < grid[i].length && grid[i][j + 1] == 1 && !visited.contains(new Coordinate(i, j + 1)))
-            area += dfsArea(i, j + 1, grid, visited);
+
+        for (int[] xy : new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}) {
+            if (shouldTraverse(grid, i + xy[0], j + xy[1])) {
+                area += dfsArea(i + xy[0], j + xy[1], grid);
+            }
+        }
         return area;
+    }
+
+    private boolean shouldTraverse(int[][] grid, int x, int y) {
+        return x >= 0 && x < grid.length
+                && y >= 0 && y < grid[x].length
+                && grid[x][y] == 1
+                && !visited.contains(new Coordinate(x, y));
     }
 
 

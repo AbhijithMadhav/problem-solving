@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters">...</a>
  */
-public class MaxSubStringWithDistinctCharacters {
+public class LongestSubStringWithDistinctCharacters {
 
     public int lengthOfLongestSubstring(String string) {
         int max =  0;

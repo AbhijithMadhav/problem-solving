@@ -28,7 +28,7 @@ public class BurstBalloons {
             maxCoins = Math.max(
                     maxCoins,
                     coins(nums, l, i - 1)
-                            + (nums[l - 1] * nums[i] * nums[r + 1]) // crux
+                            + (nums[l - 1] * nums[i] * nums[r + 1]) // crux : ith balloon is burst last
                             + coins(nums, i + 1, r)
             );
         return maxCoins;
