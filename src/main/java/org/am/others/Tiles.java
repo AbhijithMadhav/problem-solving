@@ -32,9 +32,7 @@ public class Tiles {
 
 
     private boolean isValidPattern(Tile a, Tile b, Tile c) {
-        if (a.equals(b) && b.equals(c))
-            return true;
-        return false;
+        return a.equals(b) && b.equals(c);
         //else return a.color.equals(b.color) && b.color.equals(c.color) && b.number == a.number + 1 && c.number = b.number + 1;
     }
 
@@ -47,7 +45,7 @@ public class Tiles {
         return (Tile[]) subset.toArray();
     }
 
-    class Tile {
+    static class Tile {
 
         private int number;
         private RGB color;
