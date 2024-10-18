@@ -14,7 +14,7 @@ class MedianFinder {
     // The crux of a simple implementation is to insert into maxPQ first.
     // Now two movements might be necessary
     // 1. The element was wrongly added to maxPQ and needs to be moved to minPQ
-    // 2. Move element to from minPQ to MaxPQ or vice-versa to ensure balance of PQ's to find median
+    // 2. Move element from minPQ to MaxPQ or vice-versa to ensure balance of PQ's to find median
     // NOTE : Instead of PQ's the same could have been implemented using a linked list. Insertion of elements maintain
     //        order by using binary search
     public void addNum(int num) {

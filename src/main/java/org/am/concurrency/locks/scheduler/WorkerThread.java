@@ -52,6 +52,7 @@ class WorkerThread extends Thread {
                 queue.put(job); // Scheduled time is not yet up. So put it back
                 job = null;
             }
+            // if this is a recurring job, create an instance for the next run
             if (job != null && job.interval() != null)
                 queue.put(new DefaultJob(job.priority(), job.startsAt() + job.interval().toMillis(), job.interval()));
         } finally {
